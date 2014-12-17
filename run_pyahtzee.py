@@ -1,5 +1,22 @@
+from random import randint
+
+def how_many_users():
+    y = 0
+    while y == 0:
+        players = (raw_input("How many players? \n > "))
+        if players.isdigit():
+            players = int(players)
+            if players <= 0:
+                print "Please enter a number greater than 0"
+            else:
+                return players
+        else:
+            print "Please enter a number."
+
+how_many_users()
+
 if "null" in scoreboard:
-	for each in range(player):
+	for each in range(players):
 	    def turn():
 	        dice = []
             status = 1 #which turn they're on
@@ -36,4 +53,3 @@ if "null" in scoreboard:
 	                    #interpret score category
 	                    #store result of scoring algorithm in dictionary (will replace "null")
 	                
-#ilikeyourboobs
