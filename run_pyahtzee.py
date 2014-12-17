@@ -15,6 +15,21 @@ def how_many_users():
 
 how_many_users()
 
+score_display = ["Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a kind", "Full House", "Small Straight (Sequence of 4)", "Large Straight (Sequence of 5)", "Yahtzee", "Chance"]
+
+scoreboard = {}
+
+def populate_scoreboards():
+    #for x in range(players): *want to clone scorecard per player*
+    for i in score_display:
+        if i == "Yahtzee":
+            scoreboard[i] = ["null"]
+        else:
+            scoreboard[i] = "null"
+    return scoreboard
+
+populate_scoreboards()
+
 if "null" in scoreboard:
 	for each in range(players):
 	    def turn():
