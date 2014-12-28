@@ -15,7 +15,7 @@ def how_many_users():
 
 how_many_users()
 
-score_display = ["Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a kind", "Full House", "Small Straight (Sequence of 4)", "Large Straight (Sequence of 5)", "Yahtzee", "Chance"]
+score_display = ["Aces", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a kind", "Full House", "Small Straight (Sequence of 4)", "Large Straight (Sequence of 5)", "Yahtzee", "Chance"]
 
 scoreboard = {}
 
@@ -29,6 +29,99 @@ def populate_scoreboards():
     return scoreboard
 
 populate_scoreboards()
+
+def score_roll():
+    category = raw_input("How do you want to score this roll? ")
+    print "Categories are: ", score_display
+    if category in scoreboard:
+        if scoreboard[category] == "null":
+            if category == "Aces":
+                result = 0
+                for x in dice:
+                    if x == 1:
+                        result += x
+                scoreboard["Aces"] = result
+            elif category == "Twos":
+                result = 0
+                for x in dice:
+                    if x == 2:
+                        result += x
+                scoreboard["Twos"] = result
+            elif category == "Threes":
+                result = 0
+                for x in dice:
+                    if x == 3:
+                        result += x
+                scoreboard["Threes"] = result
+            elif category == "Fours":
+                result = 0
+                for x in dice:
+                    if x == 4:
+                        result += x
+                scoreboard["Fours"] = result
+            elif category == "Fives":
+                result = 0
+                for x in dice:
+                    if x == 5:
+                        result += x
+                scoreboard["Fives"] = result
+            elif category == "Sixes":
+                result = 0
+                for x in dice:
+                    if x == 6:
+                        result += x
+                scoreboard["Sixes"] = result
+            elif category == "Three of a Kind":
+                result = 0
+                for x in dice:
+                    if dice.count(x) >= 3:
+                        result = dice[0] + dice[1] + dice[2] + dice[3] + dice[4]
+                scoreboard["Three of a Kind"] = result
+            elif category == "Four of a Kind":
+                result = 0
+                for x in dice:
+                    if dice.count(x) >= 4:
+                        result = dice[0] + dice[1] + dice[2] + dice[3] + dice[4]
+                scoreboard["Four of a Kind"] = result
+            elif category == "Small Straight (Sequence of 4)":
+                result = 0
+                for x in dice:
+                    if dice.count(x) > 1:
+                        dice.remove(x)
+                if dice.sort() == [1, 2, 3, 4]:
+                    result = 30
+                elif dice.sort() == [2, 3, 4, 5]:
+                    result = 30
+                elif dice.sort() == [1, 2, 3, 4, 5]:
+                    result = 30
+                scoreboard["Small Straight (Sequence of 4)"] = result
+            elif category == "Large Straight (Sequence of 5)":
+                result = 0
+                if dice.sort() == [1, 2, 3, 4, 5]:
+                    result = 40
+                scoreboard["Large Straight (Sequence of 5)"] = result
+            else:
+                scoreboard["Chance"] = dice[0] + dice[1] + dice[2] + dice[3] + dice[4]
+        elif category == "Yahtzee":
+            result = 0
+            if scoreboard["Yahtzee"] == ["null"]:
+                if dice.count(dice[0]) == 5:
+                     result = 50
+                scoreboard["Yahtzee"] = [result]
+            elif scoreboard["Yahtzee"] == [0]:
+                print "You have already scored a 0 in Yahtzee. Please choose another category."
+                score_roll()
+            else:
+                if dice.count(dice[0]) == 5:
+                    scoreboard["Yahtzee"].append(100)
+            print "Your score for %s is " %(category), result
+        else:
+            print "You have already scored this category. Please choose another category."
+            score_roll()
+    else:
+        print "Please enter a valid category."
+        score_roll()
+    
 
 if "null" in scoreboard:
 	for each in range(players):
