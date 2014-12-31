@@ -15,7 +15,7 @@ def how_many_users():
 
 how_many_users()
 
-score_display = ["Aces", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a kind", "Full House", "Small Straight (Sequence of 4)", "Large Straight (Sequence of 5)", "Yahtzee", "Chance"]
+score_display = ["Aces", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight (Sequence of 4)", "Large Straight (Sequence of 5)", "Yahtzee", "Chance"]
 
 scoreboard = {}
 
@@ -83,25 +83,40 @@ def score_roll():
                     if dice.count(x) >= 4:
                         result = dice[0] + dice[1] + dice[2] + dice[3] + dice[4]
                 scoreboard["Four of a Kind"] = result
+            elif category == "Full House":
+                result = 0
+                dice.sort()
+                if dice.count(dice[0]) == 2 and dice.count(dice[2]) == 3:
+                    result = 25
+                elif dice.count(dice[4]) == 2 and dice.count(dice[0]) == 3:
+                    result = 25
+                scoreboard["Full House"] = result
             elif category == "Small Straight (Sequence of 4)":
                 result = 0
+                dice.sort()
                 for x in dice:
                     if dice.count(x) > 1:
                         dice.remove(x)
-                if dice.sort() == [1, 2, 3, 4]:
+                if dice == [1, 2, 3, 4]:
                     result = 30
-                elif dice.sort() == [2, 3, 4, 5]:
+                elif dice == [2, 3, 4, 5]:
                     result = 30
-                elif dice.sort() == [1, 2, 3, 4, 5]:
+                elif dice == [1, 2, 3, 4, 5]:
+                    result = 30
+                elif dice == [2, 3, 4, 5, 6]:
                     result = 30
                 scoreboard["Small Straight (Sequence of 4)"] = result
             elif category == "Large Straight (Sequence of 5)":
                 result = 0
-                if dice.sort() == [1, 2, 3, 4, 5]:
+                dice.sort()
+                if dice == [1, 2, 3, 4, 5]:
+                    result = 40
+                elif dice == [2, 3, 4, 5, 6]:
                     result = 40
                 scoreboard["Large Straight (Sequence of 5)"] = result
             else:
-                scoreboard["Chance"] = dice[0] + dice[1] + dice[2] + dice[3] + dice[4]
+                result = dice[0] + dice[1] + dice[2] + dice[3] + dice[4]
+                scoreboard["Chance"] = result
         elif category == "Yahtzee":
             result = 0
             if scoreboard["Yahtzee"] == ["null"]:
@@ -114,14 +129,15 @@ def score_roll():
             else:
                 if dice.count(dice[0]) == 5:
                     scoreboard["Yahtzee"].append(100)
-            print "Your score for %s is " %(category), result
+                else: 
+                    print "You don't have a Yahtzee. Please choose another category."
+                    score_roll()
         else:
             print "You have already scored this category. Please choose another category."
             score_roll()
     else:
         print "Please enter a valid category."
         score_roll()
-    
 
 if "null" in scoreboard:
 	for each in range(players):
