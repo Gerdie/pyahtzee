@@ -13,11 +13,11 @@ def how_many_users():
         else:
             print "Please enter a number."
 
-how_many_users()
-
 score_display = ["Aces", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight (Sequence of 4)", "Large Straight (Sequence of 5)", "Yahtzee", "Chance"]
 
 scoreboard = {}
+
+dice = []
 
 def populate_scoreboards():
     #for x in range(players): *want to clone scorecard per player*
@@ -138,42 +138,51 @@ def score_roll():
     else:
         print "Please enter a valid category."
         score_roll()
+        
+def roll():
+    status = 0
+    if status < 3:
+        status += 1
+        existing = len(dice)
+	    for x in range(5 - existing):
+	        i = randint(1, 6)
+	        dice.append(i)
+	    print "You rolled: ", dice[existing:]
+	    print "Here are your dice: ", dice
+	    if status < 3:
+	        if raw_input("Roll again? Y/N: ") == "N":
+	            break
+	    else: 
+	        discards = raw_input("Which dice do you want to re-roll? 1, 2, 3, etc.")
+	        discard_list = []
+	        for y in discards:
+	            if y != " " and y != ",":
+	                discard_list.append(int(y))
+	        for x in discard_list:
+	            if x in dice:
+	                dice.remove(x)
+	                
+def final_score():
+    x = scoreboard["Aces"] + scoreboard["Twos"] + scoreboard["Threes"] + scoreboard["Fours"] + scoreboard["Fives"] + scoreboard["Sixes"]
+    if x >= 63:
+        x += 35
+    x += scoreboard["Three of a Kind"] + scoreboard["Four of a Kind"] + scoreboard["Full House"] + scoreboard["Small Straight (Sequence of 4)"] + scoreboard["Large Straight (Sequence of 5)"] + scoreboard["Chance"]
+    for i in scoreboard["Yahtzee"]:
+        x += i
+    print "Your final score is:", x
+
+def turn():
+    dice = []
+    roll()
+    score_roll()
+    
+how_many_users()
 
 if "null" in scoreboard:
 	for each in range(players):
-	    def turn():
-	        dice = []
-            status = 1 #which turn they're on
-	        def roll():
-	            if dice = []: #first roll
-	                # generate 5 random #s from 1-6 
-                    # store #s in dice
-	                    print dice
-	                    status += 1
-	                    #user input: roll again?
-	                    #if yes:
-	                        roll()
-	                    #if no:
-	                        #user input: how would you like to score this roll?"
-	                        #interpret score category
-	                        #store result of scoring algorithm in dictionary (will replace "null")
-	            else: #2nd, 3rd rolls
-	                #user input: which dice to re-roll? convert input to integers
-	                #remove selected integers from dice array
-	                #generate replacement random #s
-	                #append replacement #s to dice array
-	                print dice
-	                status += 1
-	                if status <= 3:
-	                    #user input: roll again?
-	                    #if yes:
-	                        roll()
-	                    #if no:
-	                        #user input: how would you like to score this roll?"
-	                        #interpret score category
-	                        #store result of scoring algorithm in dictionary (will replace "null")
-	                else:
-	                    #user input: how would you like to score this roll?"
-	                    #interpret score category
-	                    #store result of scoring algorithm in dictionary (will replace "null")
+	    turn()
+else:
+    final_score()
+    print "Game Over!"
+    
 	                
