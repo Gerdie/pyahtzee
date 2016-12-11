@@ -1,9 +1,9 @@
 from random import randint
 
-scoreboard = {}
-dice = []
-score_display = ["Aces", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight (Sequence of 4)", "Large Straight (Sequence of 5)", "Yahtzee", "Chance"]
-bonus_count = 0
+SCOREBOARD = {}
+DICE = []
+SCORE_DISPLAY = ["Aces", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight (Sequence of 4)", "Large Straight (Sequence of 5)", "Yahtzee", "Chance"]
+BONUS_COUNT = 0
 
 def how_many_users():
     y = 0
@@ -21,59 +21,59 @@ def how_many_users():
 
 
 def populate_scoreboards():
-    for i in score_display:
-        scoreboard[i] = []
-        for x in range(players):     #want to clone scorecard per player*
+    for i in SCORE_DISPLAY:
+        SCOREBOARD[i] = []
+        for x in range(players):     # want to clone scorecard per player*
             if i == "Yahtzee":
-                scoreboard[i].append(["null"])
+                SCOREBOARD[i].append(["null"])
             else:
-                scoreboard[i].append("null")
-    return scoreboard
+                SCOREBOARD[i].append("null")
+    return SCOREBOARD
 
 
-def small_score(dice, y):
+def small_score(DICE, y):
     result = 0
-    for x in dice:
+    for x in DICE:
         if x == y:
             result += x
         return result
 
 
-def score_roll(players, dice):
+def score_roll(players, DICE):
     scoring = 0
     while scoring == 0:
         print "pass 1/6 ", scoring
         category = raw_input("How do you want to score this roll? ")
         print category
-        print "Categories are: ", score_display
-        if category not in scoreboard:
+        print "Categories are: ", SCORE_DISPLAY
+        if category not in SCOREBOARD:
             print "Please enter a valid category."
         else:
-            temp = scoreboard[category]
+            temp = SCOREBOARD[category]
             if category == "Yahtzee":
                 result = 0
                 if temp[players] == ["null"]:
-                    if dice.count(dice[0]) == 5:
+                    if DICE.count(DICE[0]) == 5:
                         result = 50
                         temp[players] = result
-                        scoreboard["Yahtzee"] = temp
+                        SCOREBOARD["Yahtzee"] = temp
                         return category
                         scoring = 1
                     else:
                         print "You have scored a 0 in Yahtzee."
                         temp[players] = result
-                        scoreboard["Yahtzee"] = temp
+                        SCOREBOARD["Yahtzee"] = temp
                         return category
                         scoring = 1
                 elif temp[players] == [0]:
                     print "You have already scored a 0 in Yahtzee. Please choose another category."
                 else:
-                    if dice.count(dice[0]) == 5:
+                    if DICE.count(DICE[0]) == 5:
                         temp2 = temp[players]
                         temp2.append(100)
                         temp[players] = temp2
-                        scoreboard["Yahtzee"] = temp
-                        bonus_count += 1
+                        SCOREBOARD["Yahtzee"] = temp
+                        BONUS_COUNT += 1
                         print "Congratulations, you scored a bonus Yahtzee! Take an extra turn."
                         category = "bonus"
                         return category
@@ -83,126 +83,126 @@ def score_roll(players, dice):
                 print "pass 2"
                 if category == "Aces":
                     result = 0
-                    for x in dice:
+                    for x in DICE:
                         if x == 1:
                             result += x
                     print result
                     temp[players] = result
-                    scoreboard["Aces"] = temp
-                    print "pass 3 ", scoreboard
+                    SCOREBOARD["Aces"] = temp
+                    print "pass 3 ", SCOREBOARD
                     return category
                     print "pass 4 ", scoring
                     scoring = 1
                     print "pass 5 ", scoring
                 elif category == "Twos":
                     result = 0
-                    for x in dice:
+                    for x in DICE:
                         if x == 2:
                             result += x
                     temp[players] = result
-                    scoreboard["Twos"] = temp
+                    SCOREBOARD["Twos"] = temp
                     return category
                     scoring = 1
                 elif category == "Threes":
                     result = 0
-                    for x in dice:
+                    for x in DICE:
                         if x == 3:
                             result += x
                     temp[players] = result
-                    scoreboard["Threes"] = temp
+                    SCOREBOARD["Threes"] = temp
                     return category
                     scoring = 1
                 elif category == "Fours":
                     result = 0
-                    for x in dice:
+                    for x in DICE:
                         if x == 4:
                             result += x
                     temp[players] = result
-                    scoreboard["Fours"] = temp
+                    SCOREBOARD["Fours"] = temp
                     return category
                     scoring = 1
                 elif category == "Fives":
                     result = 0
-                    for x in dice:
+                    for x in DICE:
                         if x == 5:
                             result += x
                     temp[players] = result
-                    scoreboard["Fives"] = temp
+                    SCOREBOARD["Fives"] = temp
                     return category
                     scoring = 1
                 elif category == "Sixes":
                     result = 0
-                    for x in dice:
+                    for x in DICE:
                         if x == 6:
                             result += x
                     temp[players] = result
-                    scoreboard["Sixes"] = temp
+                    SCOREBOARD["Sixes"] = temp
                     return category
                     scoring = 1
                 elif category == "Three of a Kind":
                     result = 0
-                    for x in dice:
-                        if dice.count(x) >= 3:
-                            result = dice[0] + dice[1] + dice[2] + dice[3] + dice[4]
+                    for x in DICE:
+                        if DICE.count(x) >= 3:
+                            result = DICE[0] + DICE[1] + DICE[2] + DICE[3] + DICE[4]
                     temp[players] = result
-                    scoreboard["Three of a Kind"] = temp
+                    SCOREBOARD["Three of a Kind"] = temp
                     return category
                     scoring = 1
                 elif category == "Four of a Kind":
                     result = 0
-                    for x in dice:
-                        if dice.count(x) >= 4:
-                            result = dice[0] + dice[1] + dice[2] + dice[3] + dice[4]
+                    for x in DICE:
+                        if DICE.count(x) >= 4:
+                            result = DICE[0] + DICE[1] + DICE[2] + DICE[3] + DICE[4]
                     temp[players] = result
-                    scoreboard["Four of a Kind"] = temp
+                    SCOREBOARD["Four of a Kind"] = temp
                     return category
                     scoring = 1
                 elif category == "Full House":
                     result = 0
-                    dice.sort()
-                    if dice.count(dice[0]) == 2 and dice.count(dice[2]) == 3:
+                    DICE.sort()
+                    if DICE.count(DICE[0]) == 2 and DICE.count(DICE[2]) == 3:
                         result = 25
-                    elif dice.count(dice[4]) == 2 and dice.count(dice[0]) == 3:
+                    elif DICE.count(DICE[4]) == 2 and DICE.count(DICE[0]) == 3:
                         result = 25
                     else:
                         result = 0
                     temp[players] = result
-                    scoreboard["Full House"] = temp
+                    SCOREBOARD["Full House"] = temp
                     return category
                     scoring = 1
                 elif category == "Small Straight (Sequence of 4)":
                     result = 0
-                    dice.sort()
-                    for x in dice:
-                        if dice.count(x) > 1:
-                            dice.remove(x)
-                    if dice == [1, 2, 3, 4]:
+                    DICE.sort()
+                    for x in DICE:
+                        if DICE.count(x) > 1:
+                            DICE.remove(x)
+                    if DICE == [1, 2, 3, 4]:
                         result = 30
-                    elif dice == [2, 3, 4, 5]:
+                    elif DICE == [2, 3, 4, 5]:
                         result = 30
-                    elif dice == [1, 2, 3, 4, 5]:
+                    elif DICE == [1, 2, 3, 4, 5]:
                         result = 30
-                    elif dice == [2, 3, 4, 5, 6]:
+                    elif DICE == [2, 3, 4, 5, 6]:
                         result = 30
                     temp[players] = result
-                    scoreboard["Small Straight (Sequence of 4)"] = temp
+                    SCOREBOARD["Small Straight (Sequence of 4)"] = temp
                     return category
                     scoring = 1
                 elif category == "Large Straight (Sequence of 5)":
                     result = 0
-                    dice.sort()
-                    if dice == [1, 2, 3, 4, 5]:
+                    DICE.sort()
+                    if DICE == [1, 2, 3, 4, 5]:
                         result = 40
-                    elif dice == [2, 3, 4, 5, 6]:
+                    elif DICE == [2, 3, 4, 5, 6]:
                         result = 40
                     temp[players] = result
-                    scoreboard["Large Straight (Sequence of 5)"] = temp
+                    SCOREBOARD["Large Straight (Sequence of 5)"] = temp
                     return category
                     scoring = 1
                 else:
-                    result = dice[0] + dice[1] + dice[2] + dice[3] + dice[4]
+                    result = DICE[0] + DICE[1] + DICE[2] + DICE[3] + DICE[4]
                     temp[players] = result
-                    scoreboard["Chance"] = temp
+                    SCOREBOARD["Chance"] = temp
                     return category
                     scoring = true
             else:
@@ -210,16 +210,16 @@ def score_roll(players, dice):
 
 
 def roll():
-    dice = []
+    DICE = []
     status = 0
     while status < 3:
         status += 1
-        existing = len(dice)
+        existing = len(DICE)
         for x in range(5 - existing):
             i = randint(1, 6)
-            dice.append(i)
-        print "You rolled: ", dice[existing:]
-        print "Here are your dice: ", dice
+            DICE.append(i)
+        print "You rolled: ", DICE[existing:]
+        print "Here are your dice: ", DICE
         if status < 3:
             if raw_input("Roll again? Y/N: ") == "N":
                 status = 3
@@ -230,30 +230,30 @@ def roll():
                     if y.isdigit():
                         discard_list.append(int(y))
                 for x in discard_list:
-                    if x in dice:
-                        dice.remove(x)
-    return dice
+                    if x in DICE:
+                        DICE.remove(x)
+    return DICE
 
 
 def final_score(person):
-    x = scoreboard["Aces"[person]] + scoreboard["Twos"[person]] + scoreboard["Threes"[person]] + scoreboard["Fours"[person]] + scoreboard["Fives"[person]] + scoreboard["Sixes"[person]]
+    x = SCOREBOARD["Aces"[person]] + SCOREBOARD["Twos"[person]] + SCOREBOARD["Threes"[person]] + SCOREBOARD["Fours"[person]] + SCOREBOARD["Fives"[person]] + SCOREBOARD["Sixes"[person]]
     if x >= 63:
         x += 35
-    x += scoreboard["Three of a Kind"[person]] + scoreboard["Four of a Kind"[person]] + scoreboard["Full House"[person]] + scoreboard["Small Straight (Sequence of 4)"[person]] + scoreboard["Large Straight (Sequence of 5)"[person]] + scoreboard["Chance"[person]]
-    for i in scoreboard["Yahtzee"[person]]:
+    x += SCOREBOARD["Three of a Kind"[person]] + SCOREBOARD["Four of a Kind"[person]] + SCOREBOARD["Full House"[person]] + SCOREBOARD["Small Straight (Sequence of 4)"[person]] + SCOREBOARD["Large Straight (Sequence of 5)"[person]] + SCOREBOARD["Chance"[person]]
+    for i in SCOREBOARD["Yahtzee"[person]]:
         x += i
     print "Your final score is:", x
 
 
 def turn(players):
-    dice = roll()
-    score_roll(players, dice)
-   
+    DICE = roll()
+    score_roll(players, DICE)
+
 players = how_many_users()
 #print "You entered ", players, " players"
 populate_scoreboards()
 #print scoreboard
-null_count = len(score_display) * players
+null_count = len(SCORE_DISPLAY) * players
 
 while null_count > 0:
     for x in range(players):
