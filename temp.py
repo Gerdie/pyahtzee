@@ -189,6 +189,8 @@ def roll():
     return dice
 	                
 def final_score(person):
+    for key in scoreboard:
+    	tempy = key[person]
     x = scoreboard["Aces"[person]] + scoreboard["Twos"[person]] + scoreboard["Threes"[person]] + scoreboard["Fours"[person]] + scoreboard["Fives"[person]] + scoreboard["Sixes"[person]]
     if x >= 63:
         x += 35
