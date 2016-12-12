@@ -6,5 +6,33 @@
 
 <p>Yahtzee for Snakes!</p>
 
+{% if players %}
+
+{% for player in players %}
+<div class="scorecard">
+
+<h2>Scorecard</h2>
+
+<div>Aces: {{SCORECARD["Aces"][player]}}</div>
+<div>Twos: {{SCORECARD["Twos"][player]}}</div>
+<div>Threes: {{SCORECARD["Threes"][player]}}</div>
+<div>Fours: {{SCORECARD["Fours"][player]}}</div>
+<div>Fives: {{SCORECARD["Fives"][player]}}</div>
+<div>Sixes: {{SCORECARD["Sixes"][player]}}</div>
+<div>Three of a Kind: {{SCORECARD["Three of a Kind"][player]}}</div>
+<div>Four of a Kind: {{SCORECARD["Four of a Kind"][player]}}</div>
+<div>Full House: {{SCORECARD["Full House"][player]}}</div>
+<div>Small Straight (Sequence of 4): {{SCORECARD["Small Straight (Sequence of 4)"][player]}}</div>
+<div>Large Straight (Sequence of 5): {{SCORECARD["Large Straight (Sequence of 5)"][player]}}</div>
+<div>Yahtzee: {{SCORECARD["Yahtzee"][player]}}</div>
+<div>Chance: {{SCORECARD["Chance"][player]}}</div>
+
+
+</div>
+
+{% endfor %}
+
+{% endif %}
+
 </body>
 </html>
