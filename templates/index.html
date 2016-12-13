@@ -6,11 +6,6 @@
 
 <p>Yahtzee for Snakes!</p>
 
-<form method="POST" action="/players">
-<input type="number" name="players" required>
-<input type="submit" value="Play!">
-</form>
-
 {% if players in session %}
 
 {% for player in range(players) %}
@@ -36,6 +31,13 @@
 </div>
 
 {% endfor %}
+
+{% else %}
+
+<form method="POST" action="/players">
+<input type="number" name="players" required>
+<input type="submit" value="Play!">
+</form>
 
 {% endif %}
 
