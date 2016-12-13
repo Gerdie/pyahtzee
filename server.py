@@ -28,8 +28,8 @@ def show_home():
 def get_players():
     """Get number of players"""
 
-    num = request.form.get('players')
-    players = how_many_users(int(num))
+    players = request.form.get('players')
+    players = int(players)
     session['players'] = players
     populate_scoreboards()
 

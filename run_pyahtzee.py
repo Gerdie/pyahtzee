@@ -5,19 +5,19 @@ DICE = []
 SCORE_DISPLAY = ["Aces", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight (Sequence of 4)", "Large Straight (Sequence of 5)", "Yahtzee", "Chance"]
 BONUS_COUNT = 0
 
-def how_many_users():
-    y = 0
-    while y == 0:
-        players = (raw_input("How many players? \n > "))
-        if players.isdigit():
-            players = int(players)
-            if players <= 0:
-                print "Please enter a number greater than 0"
-            else:
-                y = 1
-        else:
-            print "Please enter a number."
-    return players
+# def how_many_users():
+#     y = 0
+#     while y == 0:
+#         players = (raw_input("How many players? \n > "))
+#         if players.isdigit():
+#             players = int(players)
+#             if players <= 0:
+#                 print "Please enter a number greater than 0"
+#             else:
+#                 y = 1
+#         else:
+#             print "Please enter a number."
+#     return players
 
 
 def populate_scoreboards():
