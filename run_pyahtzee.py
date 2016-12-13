@@ -249,9 +249,9 @@ def turn(players):
     DICE = roll()
     score_roll(players, DICE)
 
-players = how_many_users()
+# players = how_many_users()
 #print "You entered ", players, " players"
-populate_scoreboards()
+# populate_scoreboards()
 #print scoreboard
 null_count = len(SCORE_DISPLAY) * players
 
