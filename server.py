@@ -18,10 +18,7 @@ app.jinja_env.auto_reload = True
 def show_home():
     """Display homepage"""
 
-    if players not in session:
-        SCORECARD = {}
-
-    return render_template("index.html", SCORECARD=SCORECARD)
+    return render_template("index.html")
 
 
 @app.route('/players', methods=['POST'])
@@ -31,7 +28,8 @@ def get_players():
     players = request.form.get('players')
     players = int(players)
     session['players'] = players
-    populate_scoreboards()
+    scoreboard = populate_scoreboards(players)
+    session['scoreboard'] = scoreboard
 
     return redirect('/')
 

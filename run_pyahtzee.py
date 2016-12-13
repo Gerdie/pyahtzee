@@ -1,6 +1,6 @@
 from random import randint
 
-SCOREBOARD = {}
+# SCOREBOARD = {}
 DICE = []
 SCORE_DISPLAY = ["Aces", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight (Sequence of 4)", "Large Straight (Sequence of 5)", "Yahtzee", "Chance"]
 BONUS_COUNT = 0
@@ -20,7 +20,7 @@ BONUS_COUNT = 0
 #     return players
 
 
-def populate_scoreboards():
+def populate_scoreboards(players):
     for i in SCORE_DISPLAY:
         SCOREBOARD[i] = []
         for x in range(players):     # want to clone scorecard per player*

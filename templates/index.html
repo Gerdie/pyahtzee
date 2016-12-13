@@ -11,26 +11,26 @@
 <input type="submit" value="Play!">
 </form>
 
-{% if players %}
+{% if players in session %}
 
-{% for player in players %}
+{% for player in range(players) %}
 <div class="scorecard">
 
 <h2>Scorecard</h2>
 
-<div>Aces: {{SCORECARD["Aces"][player]}}</div>
-<div>Twos: {{SCORECARD["Twos"][player]}}</div>
-<div>Threes: {{SCORECARD["Threes"][player]}}</div>
-<div>Fours: {{SCORECARD["Fours"][player]}}</div>
-<div>Fives: {{SCORECARD["Fives"][player]}}</div>
-<div>Sixes: {{SCORECARD["Sixes"][player]}}</div>
-<div>Three of a Kind: {{SCORECARD["Three of a Kind"][player]}}</div>
-<div>Four of a Kind: {{SCORECARD["Four of a Kind"][player]}}</div>
-<div>Full House: {{SCORECARD["Full House"][player]}}</div>
-<div>Small Straight (Sequence of 4): {{SCORECARD["Small Straight (Sequence of 4)"][player]}}</div>
-<div>Large Straight (Sequence of 5): {{SCORECARD["Large Straight (Sequence of 5)"][player]}}</div>
-<div>Yahtzee: {{SCORECARD["Yahtzee"][player]}}</div>
-<div>Chance: {{SCORECARD["Chance"][player]}}</div>
+<div>Aces: {{session['scoreboard']["Aces"][player]}}</div>
+<div>Twos: {{session['scoreboard']["Twos"][player]}}</div>
+<div>Threes: {{session['scoreboard']["Threes"][player]}}</div>
+<div>Fours: {{session['scoreboard']["Fours"][player]}}</div>
+<div>Fives: {{session['scoreboard']["Fives"][player]}}</div>
+<div>Sixes: {{session['scoreboard']["Sixes"][player]}}</div>
+<div>Three of a Kind: {{session['scoreboard']["Three of a Kind"][player]}}</div>
+<div>Four of a Kind: {{session['scoreboard']["Four of a Kind"][player]}}</div>
+<div>Full House: {{session['scoreboard']["Full House"][player]}}</div>
+<div>Small Straight (Sequence of 4): {{session['scoreboard']["Small Straight (Sequence of 4)"][player]}}</div>
+<div>Large Straight (Sequence of 5): {{session['scoreboard']["Large Straight (Sequence of 5)"][player]}}</div>
+<div>Yahtzee: {{session['scoreboard']["Yahtzee"][player]}}</div>
+<div>Chance: {{session['scoreboard']["Chance"][player]}}</div>
 
 
 </div>
