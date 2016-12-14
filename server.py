@@ -18,6 +18,15 @@ app.jinja_env.auto_reload = True
 def show_home():
     """Display homepage"""
 
+    if players in session and players > 0:
+            while session['null_count'] > 0:
+                for x in range(players):
+                    print "Your turn, Player", x + 1
+                    turn(x)
+                    session['null_count'] -= 1
+            for y in range(players):
+                print "Player %r, your score is:" % (y + 1), final_score(y)
+
     return render_template("index.html")
 
 
@@ -30,6 +39,8 @@ def get_players():
     session['players'] = players
     scoreboard = populate_scoreboards(players)
     session['scoreboard'] = scoreboard
+    null_count = len(SCORE_DISPLAY) * players
+    session['null_count'] = null_count
 
     return redirect('/')
 

@@ -20,7 +20,7 @@ BONUS_COUNT = 0
 #     return players
 
 
-def populate_scoreboards(players):
+def populate_scoreboards(players, SCORE_DISPLAY=SCORE_DISPLAY):
     for i in SCORE_DISPLAY:
         SCOREBOARD[i] = []
         for x in range(players):     # want to clone scorecard per player*
@@ -253,16 +253,7 @@ def turn(players):
 #print "You entered ", players, " players"
 # populate_scoreboards()
 #print scoreboard
-null_count = len(SCORE_DISPLAY) * players
 
-while null_count > 0:
-    for x in range(players):
-        print "Your turn, Player", x + 1
-        turn(x)
-        null_count -= 1
-winner = {}
-for y in range(players):
-    print "Player %r, your score is:" % (y + 1), final_score(y)
     """winner[each + 1] = final_score(each)
 winner.sort()"""
 print "Game Over!"
