@@ -256,7 +256,7 @@ def turn(players):
 
     """winner[each + 1] = final_score(each)
 winner.sort()"""
-print "Game Over!"
+# print "Game Over!"
 
 
 """for category in scoreboard:

@@ -2,7 +2,7 @@ from flask import (Flask, render_template, redirect, request, flash,
                    session, jsonify)
 from jinja2 import StrictUndefined
 
-from run_pyahtzee.py import *
+from run_pyahtzee import *
 
 app = Flask(__name__)
 
@@ -18,14 +18,14 @@ app.jinja_env.auto_reload = True
 def show_home():
     """Display homepage"""
 
-    if players in session and players > 0:
-            while session['null_count'] > 0:
-                for x in range(players):
-                    print "Your turn, Player", x + 1
-                    turn(x)
-                    session['null_count'] -= 1
-            for y in range(players):
-                print "Player %r, your score is:" % (y + 1), final_score(y)
+    # if players in session and players > 0:
+    #         while session['null_count'] > 0:
+    #             for x in range(players):
+    #                 print "Your turn, Player", x + 1
+    #                 turn(x)
+    #                 session['null_count'] -= 1
+    #         for y in range(players):
+    #             print "Player %r, your score is:" % (y + 1), final_score(y)
 
     return render_template("index.html")
 

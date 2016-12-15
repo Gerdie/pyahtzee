@@ -6,9 +6,9 @@
 
 <p>Yahtzee for Snakes!</p>
 
-{% if players in session %}
+{% if "players" in session %}
 
-{% for player in range(players) %}
+{% for player in range(len(session["players"])) %}
 <div class="scorecard">
 
 <h2>Scorecard</h2>
