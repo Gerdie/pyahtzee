@@ -1,6 +1,6 @@
 from random import randint
+from flask import session
 
-# SCOREBOARD = {}
 DICE = []
 SCORE_DISPLAY = ["Aces", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight (Sequence of 4)", "Large Straight (Sequence of 5)", "Yahtzee", "Chance"]
 BONUS_COUNT = 0
@@ -21,14 +21,15 @@ BONUS_COUNT = 0
 
 
 def populate_scoreboards(players, SCORE_DISPLAY=SCORE_DISPLAY):
+    session["SCOREBOARD"] = {}
     for i in SCORE_DISPLAY:
-        SCOREBOARD[i] = []
+        session["SCOREBOARD"][i] = []
         for x in range(players):     # want to clone scorecard per player*
             if i == "Yahtzee":
-                SCOREBOARD[i].append(["null"])
+                session["SCOREBOARD"][i].append(["null"])
             else:
-                SCOREBOARD[i].append("null")
-    return SCOREBOARD
+                session["SCOREBOARD"][i].append("null")
+    return session["SCOREBOARD"]
 
 
 def small_score(DICE, y):
